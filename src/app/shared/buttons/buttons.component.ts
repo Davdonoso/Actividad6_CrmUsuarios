@@ -24,26 +24,37 @@ export class ButtonsComponent {
   router = inject(Router)
   @Input() Volver: Boolean = false;
 
-   async delete(_id: string) {
-    toast(`¿Deseas Borrar al Usuario ${this.myUsuario.first_name} ${this.myUsuario.last_name}`, {
+  async delete(_id: string) {
+    toast(`¿Deseas Borrar al Usuario ${this.myUsuario.first_name} ${this.myUsuario.last_name}?`, {
       action: {
         label: 'Aceptar',
         onClick: async () => {
-          const usuarioEliminado = await this.usuarioService.delete(_id);
-          console.log('Usuario eliminado:', usuarioEliminado);
-          
-           if (this.deleteUserEmit.observed) {
+          try {
+            const usuarioEliminado = await this.usuarioService.delete(_id);
+            console.log('Usuario eliminado:', usuarioEliminado);
+
+            if (this.deleteUserEmit.observed) {
               this.deleteUserEmit.emit(this.usuario);
-              
             } else {
               this.router.navigate(['/dashboard', 'usuarios']);
-              toast.success('Usuario eliminado con éxito');
+              toast.success('Usuario eliminado con éxito', {
+                duration: 2000
+              });
             }
+          } catch (error) {
+            console.error('Error al eliminar el usuario:', error);
+            toast.error('Error al eliminar el usuario');
           }
         }
-    
-      })
+      },
+      cancel: {
+        label: 'Cancelar',
+        onClick: () => {
+          toast.info('Eliminación cancelada',{
+            duration: 2000
+          });
+        }
       }
-      
+    });
   }
-
+}

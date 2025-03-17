@@ -34,7 +34,8 @@ export class UsuariosViewComponent {
       setTimeout(() => {
         this.router.navigate(['/dashboard', 'usuarios']);
       }, 3000); 
-      toast.success('Usuario eliminado con éxito');
+      toast.success('Usuario eliminado con éxito', {
+        duration: 3000});
       
     }
    
