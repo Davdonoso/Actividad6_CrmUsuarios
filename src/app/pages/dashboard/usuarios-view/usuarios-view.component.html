@@ -1,1 +1,21 @@
-<p>usuarios-view works!</p>
+<section class="card p-4 shadow mt-5">
+    <div class="container">
+        <div class="row align-items-center text-center text-md-start">
+           <div class="col-12 col-sm-4 mb-3 mb-sm-0 text-center">
+                <img [src]="usuario?.image" [alt]="usuario?.first_name" class="img-fluid rounded-circle w-75 w-md-100" width="150">
+            </div>
+            <div class="col-md-1 d-none d-md-flex justify-content-center">
+                <div class="vr"></div>
+            </div>
+            <div class="col-12 col-sm-7">
+                <h2 class="fw-bold fs-5">Nombre: {{usuario?.first_name}}</h2>
+                <h2 class="fw-bold fs-5">Apellidos: {{usuario?.last_name}}</h2>
+                <p><strong class="fs-6">Usuario:</strong> {{usuario?.username}}</p>
+                <p><strong class="fs-6">Email:</strong> {{usuario?.email}}</p>
+                <div class="d-flex flex-wrap justify-content-center justify-content-md-start gap-2 mt-3">
+                    <app-buttons [myUsuario]="usuario" (deleteUserEmit)="deleteUsuario(usuario._id)" [Volver]="true"></app-buttons>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
