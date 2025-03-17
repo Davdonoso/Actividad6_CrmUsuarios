@@ -1,1 +1,39 @@
-<p>usuarios-form works!</p>
+<h2 class="f-bold">{{title}} Usuario</h2>
+    <form [formGroup]="userForm" (ngSubmit)="getDataForm()">
+      <input type="hidden" formControlName="_id" placeholder="ID">
+      <div class="form-group">
+        <label for="nombre">Nombre</label>
+        <input type="text" class="form-control" id="nombre" formControlName="nombre" placeholder="Introduzca Nombre">
+        @if(userForm.get('nombre')?.hasError("required") && userForm.get('nombre')?.touched){
+        <p class="text-danger">El nombre es requerido.</p>
+        } 
+      </div>
+      <div class="form-group">
+        <label for="apellidos">Apellidos</label>
+        <input type="text" class="form-control" id="apellidos" formControlName="apellidos" placeholder="Introduzca Apellidos">
+        @if(userForm.get('apellidos')?.hasError("required") && userForm.get('apellidos')?.touched){
+      <p class="text-danger">El apellido es requerido.</p>  
+      }
+    </div>
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input type="email" class="form-control" id="email" formControlName="email" placeholder="Introduzca Email">
+        @if(userForm.get('email')?.invalid && userForm.get('email')?.touched) {
+         <p class="text-danger"> Por favor, introduce un email válido.</p>
+      }
+      @if(userForm.get('email')?.hasError("email")){
+        <p class="text-danger"> Por favor, introduce un email válido.</p>
+      }
+      </div>
+      <div class="form-group">
+        <label for="avatar">Imagen (URL)</label>
+        <input type="text" class="form-control" id="avatar" formControlName="avatar" placeholder="Introduzca una URL de la Imagen">
+        @if(userForm.get('avatar')?.hasError("required") && userForm.get('avatar')?.touched){
+          <p class="text-danger">La URL del avatar es requerida.</p>
+        } 
+        @if(userForm.get('avatar')?.hasError("pattern")){
+          <p class="text-danger">La URL del avatar no es válida.</p>
+        }
+        </div>
+      <input type="submit" class="btn btn-primary mt-3 me-3" [disabled]="!userForm.valid" [value]="userForm.get('_id')?.value ? 'Actualizar' : ' Registrar'"><input type="button" class="btn btn-danger mt-3" value="Cancelar" (click)="cancel()">
+    </form>

@@ -62,4 +62,13 @@ export class UsuarioService {
     const url = `https://peticiones.online/api/users?page=${page}&limit=${this.perPage}`;
     return lastValueFrom(this.httpClient.get<IResponse>(url));
   }
+  update(usuario: IUsuario): Promise<IUsuario> {
+    let {_id,...usuarioBody} = usuario;
+    return lastValueFrom(this.httpClient.put<IUsuario>(`${this.endPoint}/${usuario._id}`, usuarioBody));
+  }
+  insert(usuario:IUsuario): Promise<IUsuario> {
+    let {_id,...usuarioBody} = usuario;
+    return lastValueFrom(this.httpClient.post<IUsuario>(this.endPoint,usuarioBody));
+
+  }
 }
