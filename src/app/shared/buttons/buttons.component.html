@@ -1,1 +1,17 @@
-<p>buttons works!</p>
+@if(Volver) {
+    <button [routerLink]="['/dashboard', 'usuarios']" class="btn btn-sm btn-secondary m-1">
+      <fa-icon class="me-1" [icon]="faUndo"></fa-icon>Regresar
+    </button>
+  }@else {
+    <button [routerLink]="['/dashboard', 'usuarios',myUsuario?._id]" class="btn btn-sm btn-primary m-1">
+      <fa-icon [icon]="faEye"></fa-icon> Ver
+  </button>
+  }
+    <button [routerLink]="['/dashboard','usuarios', 'update' ,myUsuario?._id]" class="btn btn-sm btn-warning m-1">
+      <fa-icon [icon]="faEdit"></fa-icon> Editar
+    </button>
+    <button (click)="delete(myUsuario._id)" class="btn btn-sm btn-danger m-1">
+      <fa-icon [icon]="faTrash"></fa-icon> Eliminar
+    </button>
+    
+  

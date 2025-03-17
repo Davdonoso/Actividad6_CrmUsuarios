@@ -1,1 +1,29 @@
-<p>usuarios-list works!</p>
+<section class="container">
+    <h2 class="mx-auto text-primary text-center mb-4">Lista de Usuarios</h2>
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-lg-3 row-cols-xl-4 g-4 text-center">
+      @for(usuario of arrUsuarios; track usuario.id) {  
+        <div class="col mt-3">
+          <div class="card h-100 shadow-sm">
+            <img [src]="usuario.image" class="card-img-top mx-auto mt-3 rounded-circle" alt="{{usuario.first_name}}" style="width: 100px; height: 100px; object-fit: cover;">
+            <div class="card-body d-flex flex-column align-items-center">
+              <h5 class="card-title">{{usuario.first_name + " " + usuario.last_name}}</h5>
+              <div class="btn-group d-flex flex-wrap justify-content-center">
+               <app-buttons [myUsuario]="usuario" (deleteUserEmit)="deleteUsuario(usuario._id)"  [Volver]="false" ></app-buttons>
+              </div>
+            </div>
+          </div> 
+        </div>
+      }@empty {
+        <h2 class="text-center text-muted">NO HAY USUARIOS</h2>
+      }
+    </div>
+  </section>
+  <section>
+    <div class="mt-4 mx-auto">
+      <div class="pagination justify-content-center">
+        <button class="btn btn-primary me-3"(click)="gotoPrev()">Prev</button>
+        <button class="btn btn-secondary" (click)="gotoNext()">Next</button>
+      </div>
+    </div>
+  </section>
+  
