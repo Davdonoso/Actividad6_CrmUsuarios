@@ -22,14 +22,12 @@ export class UsuariosViewComponent {
   async ngOnInit() {
     try {
       this.usuario = await this.usuarioService.getById(this.idUsuario);
-      console.log('usuario recuperado:', this.usuario);
-    }catch(msg: any) {
+      }catch(msg: any) {
       toast.error(msg.error || 'No se ha podido recuperar el usuario')
   
     }
     }
     deleteUsuario(event: IUsuario) {
-      console.log('usuario eliminado:', this.usuario);
       this.deleteUserEmit.emit(this.usuario._id);
       setTimeout(() => {
         this.router.navigate(['/dashboard', 'usuarios']);

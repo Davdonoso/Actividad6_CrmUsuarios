@@ -31,7 +31,7 @@ export class ButtonsComponent {
         onClick: async () => {
           try {
             const usuarioEliminado = await this.usuarioService.delete(_id);
-            console.log('Usuario eliminado:', usuarioEliminado);
+            
 
             if (this.deleteUserEmit.observed) {
               this.deleteUserEmit.emit(this.usuario);
@@ -42,7 +42,6 @@ export class ButtonsComponent {
               });
             }
           } catch (error) {
-            console.error('Error al eliminar el usuario:', error);
             toast.error('Error al eliminar el usuario');
           }
         }

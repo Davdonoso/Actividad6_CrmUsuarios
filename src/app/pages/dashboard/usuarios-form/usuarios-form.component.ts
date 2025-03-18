@@ -46,20 +46,17 @@ export class UsuariosFormComponent {
      if (this.userForm.value._id) {
         try {
         response = await this.usuarioService.update(this.userForm.value);
-        console.log(response);
         toast.success("Usuario actualizado correctamente");
         setTimeout(() => {
           this.router.navigate(['/dashboard', 'usuarios']);
         }, 3000); 
         
         }catch (msg: any) {
-          console.error("Error al actualizar el usuario:",msg);
           toast.error("El usuario que intentas editar no existe");
         }
         
       } else {
         response = await this.usuarioService.insert(this.userForm.value);
-        console.log(response);
         toast.success("Usuario registrado correctamente");
         setTimeout(() => {
           this.router.navigate(['/dashboard', 'usuarios']);
@@ -67,8 +64,7 @@ export class UsuariosFormComponent {
       }
     } 
     cancel() {
-      toast.error("Cancelado proceso Actualizacion / Registro Usuario");
-      this.location.back();
+       this.location.back();
       
     }
   
