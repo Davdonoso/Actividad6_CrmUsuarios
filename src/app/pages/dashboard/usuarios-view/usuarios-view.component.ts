@@ -1,10 +1,10 @@
-import { Component, Input ,inject , EventEmitter, Output} from '@angular/core';
+import { Component, Input ,inject } from '@angular/core';
 import { ButtonsComponent } from '../../../shared/buttons/buttons.component';
 import { IUsuario } from '../../../interfaces/iusuario.interface';
 import { UsuarioService } from '../../../services/usuario.service';
 import { toast } from 'ngx-sonner';
 import { Router } from '@angular/router';
-
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-usuarios-view',
@@ -13,31 +13,28 @@ import { Router } from '@angular/router';
   styleUrl: './usuarios-view.component.css'
 })
 export class UsuariosViewComponent {
-  @Input() idUsuario:string = "";
-  usuario:IUsuario | any;
+  @Input() idUsuario: string = "";
+  usuario: IUsuario | any;
   usuarioService = inject(UsuarioService);
-  @Output() deleteUserEmit: EventEmitter<IUsuario> = new EventEmitter();
   router = inject(Router);
+  location = inject(Location);
   
   async ngOnInit() {
     try {
       this.usuario = await this.usuarioService.getById(this.idUsuario);
-      }catch(msg: any) {
-      toast.error(msg.error || 'No se ha podido recuperar el usuario')
-  
+    } catch (msg: any) {
+      toast.error(msg.error || 'No se ha podido recuperar el usuario');
     }
-    }
-    deleteUsuario(event: IUsuario) {
-      this.deleteUserEmit.emit(this.usuario._id);
-      setTimeout(() => {
-        this.router.navigate(['/dashboard', 'usuarios']);
-      }, 3000); 
-      toast.success('Usuario eliminado con éxito', {
-        duration: 3000});
-      
-    }
-   
-    
   }
-  
+
+  async eliminarUsuario() {
+    try {
+      await this.usuarioService.delete(this.idUsuario);
+      this.location.back();
+    } catch (msg: any) {
+      toast.error(msg.error || 'No se ha podido eliminar el usuario');
+    }
+  }
+}
+
 
