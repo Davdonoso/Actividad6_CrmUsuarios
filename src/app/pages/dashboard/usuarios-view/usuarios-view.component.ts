@@ -27,14 +27,5 @@ export class UsuariosViewComponent {
     }
   }
 
-  async eliminarUsuario() {
-    try {
-      await this.usuarioService.delete(this.idUsuario);
-      this.location.back();
-    } catch (msg: any) {
-      toast.error(msg.error || 'No se ha podido eliminar el usuario');
-    }
-  }
 }
-
 

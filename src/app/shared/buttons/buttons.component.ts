@@ -32,7 +32,6 @@ export class ButtonsComponent {
           try {
             const usuarioEliminado = await this.usuarioService.delete(_id);
             
-
             if (this.deleteUserEmit.observed) {
               this.deleteUserEmit.emit(this.usuario);
             } else {
