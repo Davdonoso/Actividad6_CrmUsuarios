@@ -35,6 +35,8 @@ export class UsuariosFormComponent {
       _id: new FormControl(this.idUsuario || null, []),
       nombre: new FormControl(this.usuario?.first_name || "", Validators.required),
       apellidos: new FormControl(this.usuario?.last_name || "", Validators.required),
+      username: new FormControl(this.usuario?.username || "", Validators.required),
+      password: new FormControl(this.usuario?.password || "", [Validators.required, Validators.minLength(4)]),
       email: new FormControl(this.usuario?.email || "", [Validators.required, Validators.email]),
       avatar: new FormControl(this.usuario?.image || "", [Validators.required, Validators.pattern('https?://.+')]),
     });

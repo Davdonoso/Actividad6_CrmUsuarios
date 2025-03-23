@@ -14,6 +14,23 @@
         @if(userForm.get('apellidos')?.hasError("required") && userForm.get('apellidos')?.touched){
       <p class="text-danger">El apellido es requerido.</p>  
       }
+      </div>
+      <div class="form-group">
+        <label for="username">Username</label>
+        <input type="text" class="form-control" id="username" formControlName="username" placeholder="Introduzca nombre usuario">
+        @if(userForm.get('username')?.hasError("required") && userForm.get('username')?.touched){
+      <p class="text-danger">El nombre de usuario es requerido.</p>  
+      }
+      </div>
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input type="text" class="form-control" id="password" formControlName="password" placeholder="Introduzca password">
+        @if(userForm.get('password')?.hasError("required") && userForm.get('password')?.touched){
+      <p class="text-danger">El password es requerido.</p>  
+      }
+      @if(userForm.get('password')?.hasError("minlength")){
+        <p class="text-danger">La contraseña debe tener al menos 4 caracteres.</p>
+      }
     </div>
       <div class="form-group">
         <label for="email">Email</label>
